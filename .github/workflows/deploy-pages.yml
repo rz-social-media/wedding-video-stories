@@ -31,10 +31,15 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
+      - name: Archive static site
+        run: tar -cf "$RUNNER_TEMP/artifact.tar" -C docs .
+
       - name: Upload static site
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-artifact@v4
         with:
-          path: docs
+          name: github-pages
+          path: ${{ runner.temp }}/artifact.tar
+          retention-days: 1
 
       - name: Deploy
         id: deployment
