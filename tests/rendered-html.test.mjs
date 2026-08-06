@@ -49,6 +49,9 @@ test("ships the custom fonts and removes starter dependencies", async () => {
   assert.doesNotMatch(page, /SkeletonPreview|react-loading-skeleton/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
   assert.match(packageJson, /@mux\/mux-player-react/);
+  assert.match(page, /playbackId=\{videos\[0\]\.id\}/);
+  assert.match(page, /minResolution="2160p"/);
+  assert.match(page, /maxResolution="2160p"/);
   assert.match(layout, /RZ Wedding Films/);
 
   await Promise.all([

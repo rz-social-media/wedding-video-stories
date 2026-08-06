@@ -198,6 +198,8 @@ export default function Home() {
               autoPlay
               key={videos[activeVideo].id}
               maxAutoResolution="2160p"
+              minResolution="2160p"
+              maxResolution="2160p"
               metadata={{
                 video_id: videos[activeVideo].id,
                 video_title: videos[activeVideo].title,
