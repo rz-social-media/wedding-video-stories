@@ -93,7 +93,7 @@ export default function Home() {
   };
 
   return (
-    <main className="video-showcase">
+    <main className="video-showcase" data-version="1">
       <MuxPlayer
         aria-hidden="true"
         autoPlay="muted"

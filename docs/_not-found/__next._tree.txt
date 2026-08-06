@@ -1,5 +1,5 @@
-:HL["/wedding-video-portfolio/_next/static/chunks/0qv6t.loqi4u3.css","style"]
+:HL["/wedding-video-portfolio/_next/static/chunks/0n3fwf5xgvqgb.css","style"]
 :HL["/wedding-video-portfolio/fonts/meno-display-light.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/wedding-video-portfolio/fonts/meno-display.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/wedding-video-portfolio/fonts/vogue-demi.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"lKkmwsJUBlyc9izfguWEE"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"O6at-ahEfbt4n7Bt-rgFQ"}
