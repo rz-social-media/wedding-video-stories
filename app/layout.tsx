@@ -30,9 +30,9 @@ const fontFaceStyles = `
 `;
 
 const previewImage =
-  "https://rz-social-media.github.io/wedding-video-stories/images/jasmin-daniel-hero.jpg";
+  "https://rz-social-media.github.io/wedding-films/images/jasmin-daniel-hero.jpg";
 
-const siteUrl = "https://rz-social-media.github.io/wedding-video-stories/";
+const siteUrl = "https://rz-social-media.github.io/wedding-films/";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
