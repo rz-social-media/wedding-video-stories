@@ -1,0 +1,221 @@
+"use client";
+
+import MuxPlayer from "@mux/mux-player-react";
+import type { MuxPlayerCSSProperties } from "@mux/mux-player-react";
+import { useEffect, useState } from "react";
+
+const videos = [
+  {
+    id: "U4dV8gv00k100tBpVS9KrAfxAOPuBd5XskwlHHcdSChak",
+    title: "Teaser — 4K",
+    duration: "00:27",
+    thumbnailTime: 12,
+  },
+  {
+    id: "87DnRdS4efJH541k1eIoqx012sy3Lnz900s402UHNaRUew",
+    title: "Short Film — 4K",
+    duration: "07:00",
+    thumbnailTime: 0,
+  },
+];
+
+const thumbnail = (id: string, time: number, width = 1400) =>
+  `https://image.mux.com/${id}/thumbnail.webp?time=${time}&width=${width}&fit_mode=smartcrop`;
+
+const backgroundPlayerStyle = {
+  "--controls": "none",
+  "--media-object-fit": "cover",
+  "--media-object-position": "center center",
+} as MuxPlayerCSSProperties;
+
+export default function Home() {
+  const [activeVideo, setActiveVideo] = useState<number | null>(null);
+  const [isPlaylist, setIsPlaylist] = useState(false);
+  const [heroMuted, setHeroMuted] = useState(true);
+  const [shareLabel, setShareLabel] = useState("Share");
+
+  useEffect(() => {
+    if (activeVideo === null) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setActiveVideo(null);
+        setIsPlaylist(false);
+      }
+    };
+
+    window.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [activeVideo]);
+
+  const openVideo = (index: number, playlist = false) => {
+    setIsPlaylist(playlist);
+    setActiveVideo(index);
+  };
+
+  const closePlayer = () => {
+    setActiveVideo(null);
+    setIsPlaylist(false);
+  };
+
+  const handleVideoEnded = () => {
+    if (isPlaylist && activeVideo !== null && activeVideo < videos.length - 1) {
+      setActiveVideo(activeVideo + 1);
+      return;
+    }
+    closePlayer();
+  };
+
+  const sharePage = async () => {
+    const shareData = {
+      title: "RZ Weddings — Ofir & Michael",
+      text: "Watch Ofir & Michael's wedding films.",
+      url: window.location.href,
+    };
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+        return;
+      }
+      await navigator.clipboard.writeText(window.location.href);
+      setShareLabel("Copied");
+      window.setTimeout(() => setShareLabel("Share"), 1600);
+    } catch {
+      setShareLabel("Share");
+    }
+  };
+
+  return (
+    <main className="video-showcase">
+      <MuxPlayer
+        aria-hidden="true"
+        autoPlay="muted"
+        className="hero-video"
+        loop
+        maxAutoResolution="1080p"
+        maxResolution="1080p"
+        muted={heroMuted}
+        nohotkeys
+        noMutedPref
+        paused={activeVideo !== null}
+        playbackId={videos[0].id}
+        poster={thumbnail(videos[0].id, videos[0].thumbnailTime, 1800)}
+        preload="metadata"
+        style={backgroundPlayerStyle}
+      />
+
+      <div className="cinematic-shade" aria-hidden="true" />
+
+      <header className="topbar">
+        <a className="brand" href="#top" aria-label="RZ Weddings home">
+          <span className="brand-seal">RZ</span>
+          <span className="brand-copy">
+            <strong>RZ Weddings</strong>
+            <small>Selected motion</small>
+          </span>
+        </a>
+
+        <div className="top-actions">
+          <span className="quality-chip">4K</span>
+          <button
+            className="top-action"
+            onClick={() => setHeroMuted((muted) => !muted)}
+            type="button"
+            aria-label={heroMuted ? "Turn background sound on" : "Mute background sound"}
+          >
+            {heroMuted ? "Sound off" : "Sound on"}
+          </button>
+          <button className="top-action" onClick={sharePage} type="button">
+            {shareLabel}
+          </button>
+        </div>
+      </header>
+
+      <section className="hero-copy" id="top" aria-labelledby="wedding-title">
+        <p className="eyebrow">A wedding story</p>
+        <h1 id="wedding-title">Ofir &amp; Michael</h1>
+        <p className="location">Italy · MMXXVI</p>
+        <button className="play-all" onClick={() => openVideo(0, true)} type="button">
+          <span className="play-symbol" aria-hidden="true" />
+          Play all
+        </button>
+      </section>
+
+      <section className="film-rail" aria-label="Wedding films">
+        {videos.map((video, index) => (
+          <button
+            className="film-card"
+            key={video.id}
+            onClick={() => openVideo(index)}
+            type="button"
+            aria-label={`Play ${video.title}`}
+          >
+            <img
+              alt=""
+              decoding="async"
+              loading="eager"
+              src={thumbnail(video.id, video.thumbnailTime)}
+            />
+            <span className="card-shade" aria-hidden="true" />
+            <span className="card-duration">{video.duration}</span>
+            <span className="card-copy">
+              <strong>{video.title}</strong>
+              <small>
+                <span className="mini-play" aria-hidden="true" /> Play film
+              </small>
+            </span>
+          </button>
+        ))}
+      </section>
+
+      {activeVideo !== null && (
+        <div
+          className="player-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${videos[activeVideo].title} video player`}
+          onClick={closePlayer}
+        >
+          <button
+            className="close-player"
+            onClick={closePlayer}
+            type="button"
+            aria-label="Close video player"
+          >
+            <span aria-hidden="true">×</span>
+          </button>
+
+          <div className="player-frame" onClick={(event) => event.stopPropagation()}>
+            <MuxPlayer
+              accentColor="#c4a274"
+              autoPlay
+              key={videos[activeVideo].id}
+              maxAutoResolution="2160p"
+              metadata={{
+                video_id: videos[activeVideo].id,
+                video_title: videos[activeVideo].title,
+              }}
+              onEnded={handleVideoEnded}
+              playbackId={videos[activeVideo].id}
+              poster={thumbnail(
+                videos[activeVideo].id,
+                videos[activeVideo].thumbnailTime,
+                1800,
+              )}
+              primaryColor="#ffffff"
+              secondaryColor="#2a1c14"
+              title={videos[activeVideo].title}
+            />
+          </div>
+        </div>
+      )}
+    </main>
+  );
+}
