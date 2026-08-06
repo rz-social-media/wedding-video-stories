@@ -69,7 +69,7 @@ test("ships the custom fonts and removes starter dependencies", async () => {
   assert.match(storyComponent, /minResolution="2160p"/);
   assert.match(storyComponent, /maxResolution="2160p"/);
   assert.match(layout, /RZ Weddings \| Selected Wedding Stories/);
-  assert.match(layout, /wedding-video-portfolio/);
+  assert.match(layout, /wedding-video-stories/);
   assert.match(layout, /jasmin-daniel-hero\.jpg/);
 
   await Promise.all([
