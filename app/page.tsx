@@ -1,201 +1,81 @@
 "use client";
 
-import MuxPlayer from "@mux/mux-player-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { stories } from "./stories";
 
 const publicBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-
-const videos = [
-  {
-    id: "87DnRdS4efJH541k1eIoqx012sy3Lnz900s402UHNaRUew",
-    title: "Teaser — 4K",
-    duration: "00:27",
-    thumbnailTime: 12,
-  },
-  {
-    id: "U4dV8gv00k100tBpVS9KrAfxAOPuBd5XskwlHHcdSChak",
-    title: "Short Film — 4K",
-    duration: "07:00",
-    thumbnailTime: 0,
-  },
-];
-
-const thumbnail = (id: string, time: number, width = 1400) =>
-  `https://image.mux.com/${id}/thumbnail.webp?time=${time}&width=${width}&fit_mode=smartcrop`;
+const assetUrl = (url: string) => (url.startsWith("/") ? `${publicBasePath}${url}` : url);
 
 export default function Home() {
-  const [activeVideo, setActiveVideo] = useState<number | null>(null);
-  const [isPlaylist, setIsPlaylist] = useState(false);
-  const [shareLabel, setShareLabel] = useState("Share");
-
-  useEffect(() => {
-    if (activeVideo === null) return;
-
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-
-    const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setActiveVideo(null);
-        setIsPlaylist(false);
-      }
-    };
-
-    window.addEventListener("keydown", closeOnEscape);
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      window.removeEventListener("keydown", closeOnEscape);
-    };
-  }, [activeVideo]);
-
-  const openVideo = (index: number, playlist = false) => {
-    setIsPlaylist(playlist);
-    setActiveVideo(index);
-  };
-
-  const closePlayer = () => {
-    setActiveVideo(null);
-    setIsPlaylist(false);
-  };
-
-  const handleVideoEnded = () => {
-    if (isPlaylist && activeVideo !== null && activeVideo < videos.length - 1) {
-      setActiveVideo(activeVideo + 1);
-      return;
-    }
-    closePlayer();
-  };
-
-  const sharePage = async () => {
-    const shareData = {
-      title: "RZ Weddings — Jasmin & Daniel",
-      text: "Watch Jasmin & Daniel's wedding videos.",
-      url: window.location.href,
-    };
-
-    try {
-      if (navigator.share) {
-        await navigator.share(shareData);
-        return;
-      }
-      await navigator.clipboard.writeText(window.location.href);
-      setShareLabel("Copied");
-      window.setTimeout(() => setShareLabel("Share"), 1600);
-    } catch {
-      setShareLabel("Share");
-    }
-  };
+  const [activeStory, setActiveStory] = useState(0);
 
   return (
-    <main className="video-showcase" data-version="1">
+    <main className="portfolio-shell">
       <img
         alt=""
         aria-hidden="true"
-        className="hero-image"
+        className="portfolio-backdrop"
         decoding="async"
         fetchPriority="high"
-        src={`${publicBasePath}/images/jasmin-daniel-hero.jpg`}
+        src={assetUrl(stories[activeStory].heroImage)}
       />
+      <div className="portfolio-wash" aria-hidden="true" />
 
-      <div className="cinematic-shade" aria-hidden="true" />
-
-      <header className="topbar">
-        <a className="brand" href="#top" aria-label="RZ Weddings home">
+      <header className="portfolio-header">
+        <span className="brand" aria-label="RZ Weddings">
           <span className="brand-seal">RZ</span>
           <span className="brand-copy">
             <strong>RZ Weddings</strong>
             <small>Selected motion</small>
           </span>
-        </a>
+        </span>
 
-        <div className="top-actions">
-          <span className="quality-chip">4K</span>
-          <button className="top-action" onClick={sharePage} type="button">
-            {shareLabel}
-          </button>
+        <div className="portfolio-meta" aria-label="Wedding video portfolio">
+          <span>Wedding video portfolio</span>
+          <span>Selected stories</span>
         </div>
       </header>
 
-      <section className="hero-copy" id="top" aria-labelledby="wedding-title">
-        <p className="eyebrow">A wedding story</p>
-        <h1 id="wedding-title">Jasmin &amp; Daniel</h1>
-        <p className="location">Italy · MMXXVI</p>
-        <button className="play-all" onClick={() => openVideo(0, true)} type="button">
-          <span className="play-symbol" aria-hidden="true" />
-          Play all
-        </button>
+      <section className="portfolio-intro" aria-labelledby="portfolio-title">
+        <p className="eyebrow">Stories made to be felt</p>
+        <h1 id="portfolio-title">
+          Wedding <em>Stories</em>
+        </h1>
+        <p className="portfolio-description">
+          Cinematic wedding videos shaped around atmosphere, movement and the
+          people who made the day unforgettable.
+        </p>
       </section>
 
-      <section className="film-rail" aria-label="Wedding films">
-        {videos.map((video, index) => (
-          <button
-            className="film-card"
-            key={video.id}
-            onClick={() => openVideo(index)}
-            type="button"
-            aria-label={`Play ${video.title}`}
+      <section className="story-dock" aria-label="Selected wedding stories">
+        {stories.map((story, index) => (
+          <a
+            className={`story-card${activeStory === index ? " is-active" : ""}`}
+            href={`${publicBasePath}/weddings/${story.slug}/`}
+            key={story.slug}
+            onFocus={() => setActiveStory(index)}
+            onMouseEnter={() => setActiveStory(index)}
+            aria-label={`View ${story.names}'s wedding story`}
           >
             <img
-              alt=""
+              alt={`${story.names}'s wedding story`}
               decoding="async"
-              loading="eager"
-              src={thumbnail(video.id, video.thumbnailTime)}
+              src={assetUrl(story.heroImage)}
             />
-            <span className="card-shade" aria-hidden="true" />
-            <span className="card-duration">{video.duration}</span>
-            <span className="card-copy">
-              <strong>{video.title}</strong>
-              <small>
-                <span className="mini-play" aria-hidden="true" /> Play film
-              </small>
+            <span className="story-card-shade" aria-hidden="true" />
+            <span className="story-number">{String(index + 1).padStart(2, "0")}</span>
+            <span className="story-card-copy">
+              <small>{story.location}</small>
+              <strong>{story.names}</strong>
+              <span className="story-link">View story <i aria-hidden="true">↗</i></span>
             </span>
-          </button>
+          </a>
         ))}
       </section>
 
-      {activeVideo !== null && (
-        <div
-          className="player-modal"
-          role="dialog"
-          aria-modal="true"
-          aria-label={`${videos[activeVideo].title} video player`}
-          onClick={closePlayer}
-        >
-          <button
-            className="close-player"
-            onClick={closePlayer}
-            type="button"
-            aria-label="Close video player"
-          >
-            <span aria-hidden="true">×</span>
-          </button>
-
-          <div className="player-frame" onClick={(event) => event.stopPropagation()}>
-            <MuxPlayer
-              accentColor="#c4a274"
-              autoPlay
-              key={videos[activeVideo].id}
-              maxAutoResolution="2160p"
-              minResolution="2160p"
-              maxResolution="2160p"
-              metadata={{
-                video_id: videos[activeVideo].id,
-                video_title: videos[activeVideo].title,
-              }}
-              onEnded={handleVideoEnded}
-              playbackId={videos[activeVideo].id}
-              poster={thumbnail(
-                videos[activeVideo].id,
-                videos[activeVideo].thumbnailTime,
-                1800,
-              )}
-              primaryColor="#ffffff"
-              secondaryColor="#2a1c14"
-              title={videos[activeVideo].title}
-            />
-          </div>
-        </div>
-      )}
+      <p className="portfolio-count" aria-live="polite">
+        <span>{String(activeStory + 1).padStart(2, "0")}</span> / {String(stories.length).padStart(2, "0")}
+      </p>
     </main>
   );
 }

@@ -30,28 +30,42 @@ const fontFaceStyles = `
 `;
 
 const previewImage =
-  "https://rz-social-media.github.io/wedding-video-Jasmin-Daniel/images/jasmin-daniel-hero.jpg";
+  "https://rz-social-media.github.io/wedding-video-portfolio/images/jasmin-daniel-hero.jpg";
+
+const siteUrl = "https://rz-social-media.github.io/wedding-video-portfolio/";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    "https://rz-social-media.github.io/wedding-video-Jasmin-Daniel/",
-  ),
-  title: "Jasmin & Daniel | RZ Wedding Videos",
+  metadataBase: new URL(siteUrl),
+  title: "RZ Weddings | Selected Wedding Stories",
   description:
-    "Jasmin and Daniel's wedding story, captured in cinematic motion by RZ Weddings.",
+    "Selected wedding stories captured in cinematic motion by RZ Weddings.",
   openGraph: {
-    title: "Jasmin & Daniel | RZ Wedding Videos",
-    description: "A wedding story in cinematic motion.",
-    url: "https://rz-social-media.github.io/wedding-video-Jasmin-Daniel/",
+    title: "RZ Weddings | Selected Wedding Stories",
+    description: "A collection of wedding stories in cinematic motion.",
+    url: siteUrl,
     siteName: "RZ Weddings",
-    images: [previewImage],
+    images: [
+      {
+        url: previewImage,
+        width: 2400,
+        height: 1256,
+        alt: "Jasmin and Daniel's wedding at an Italian villa",
+      },
+    ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Jasmin & Daniel | RZ Wedding Videos",
-    description: "A wedding story in cinematic motion.",
+    title: "RZ Weddings | Selected Wedding Stories",
+    description: "A collection of wedding stories in cinematic motion.",
     images: [previewImage],
+  },
+  icons: {
+    icon: [
+      { url: `${publicBasePath}/favicon.svg`, type: "image/svg+xml" },
+    ],
+    shortcut: `${publicBasePath}/favicon.svg`,
+    apple: `${publicBasePath}/apple-touch-icon.png`,
   },
 };
 

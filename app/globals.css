@@ -13,10 +13,12 @@
 
 html {
   background: #080705;
+  overflow: hidden;
 }
 
 body {
   margin: 0;
+  overflow: hidden;
   background: #080705;
   color: var(--ivory);
   font-family: "Vogue Avant Garde", Arial, sans-serif;
@@ -39,11 +41,231 @@ a:focus-visible {
 }
 
 .video-showcase {
-  min-height: 100svh;
+  height: 100svh;
   overflow: hidden;
   position: relative;
   isolation: isolate;
   background: #090806;
+}
+
+.portfolio-shell {
+  height: 100svh;
+  overflow: hidden;
+  position: relative;
+  isolation: isolate;
+  background: #100c09;
+}
+
+.portfolio-backdrop {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  object-fit: cover;
+  object-position: center 44%;
+  filter: saturate(0.78) contrast(1.04);
+  transform: scale(1.015);
+}
+
+.portfolio-wash {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(90deg, rgba(18, 11, 7, 0.88) 0%, rgba(18, 11, 7, 0.62) 33%, rgba(18, 11, 7, 0.08) 68%),
+    linear-gradient(0deg, rgba(10, 7, 5, 0.88) 0%, transparent 52%, rgba(8, 6, 4, 0.32) 100%);
+}
+
+.portfolio-header {
+  padding: 1.35rem clamp(1.25rem, 3vw, 3.2rem);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  position: relative;
+  z-index: 3;
+}
+
+.portfolio-meta {
+  padding-top: 0.3rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.portfolio-meta span + span {
+  color: var(--champagne);
+}
+
+.portfolio-intro {
+  width: min(650px, calc(100% - 2.5rem));
+  position: absolute;
+  left: clamp(1.25rem, 3vw, 3.2rem);
+  top: 29%;
+  z-index: 2;
+}
+
+.portfolio-intro h1 {
+  max-width: 620px;
+  margin: 0;
+  font-family: "Meno Display", Georgia, serif;
+  font-size: clamp(4.7rem, 8.3vw, 9.2rem);
+  font-weight: 400;
+  letter-spacing: -0.065em;
+  line-height: 0.78;
+  text-shadow: 0 8px 34px rgba(0, 0, 0, 0.25);
+}
+
+.portfolio-intro h1 em {
+  display: block;
+  color: var(--champagne);
+  font-style: italic;
+  font-weight: 300;
+}
+
+.portfolio-description {
+  width: min(430px, 92%);
+  margin: 1.7rem 0 0;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 0.68rem;
+  letter-spacing: 0.07em;
+  line-height: 1.8;
+}
+
+.story-dock {
+  width: auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.65rem, 1vw, 1.1rem);
+  position: absolute;
+  left: clamp(1.25rem, 3vw, 3.2rem);
+  right: clamp(1.25rem, 3vw, 3.2rem);
+  bottom: clamp(1.25rem, 3vw, 3.2rem);
+  z-index: 3;
+}
+
+.story-card {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: block;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 3px;
+  color: white;
+  text-decoration: none;
+  box-shadow: 0 26px 80px rgba(0, 0, 0, 0.32);
+  animation: card-rise 780ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.story-card:nth-child(2) {
+  animation-delay: 90ms;
+}
+
+.story-card:nth-child(3) {
+  animation-delay: 180ms;
+}
+
+.story-card img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 900ms cubic-bezier(0.2, 0.68, 0.2, 1), filter 500ms ease;
+}
+
+.story-card-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(0deg, rgba(11, 7, 5, 0.9) 0%, rgba(11, 7, 5, 0.08) 68%),
+    linear-gradient(90deg, rgba(11, 7, 5, 0.2), transparent 55%);
+}
+
+.story-number {
+  position: absolute;
+  top: 1.15rem;
+  left: 1.25rem;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.58rem;
+  letter-spacing: 0.17em;
+}
+
+.story-card-copy {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 1.5rem;
+  bottom: 1.35rem;
+  left: 1.5rem;
+}
+
+.story-card-copy small {
+  margin-bottom: 0.55rem;
+  color: var(--champagne);
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.story-card-copy strong {
+  font-family: "Meno Display", Georgia, serif;
+  font-size: clamp(2rem, 3vw, 3.5rem);
+  font-style: italic;
+  font-weight: 300;
+  letter-spacing: -0.045em;
+  line-height: 0.95;
+}
+
+.story-link {
+  margin-top: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.56rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.story-link i {
+  color: var(--champagne);
+  font-family: Arial, sans-serif;
+  font-size: 0.9rem;
+  font-style: normal;
+  transition: transform 180ms ease;
+}
+
+.story-card:hover img,
+.story-card:focus-visible img {
+  filter: saturate(1.08);
+  transform: scale(1.035);
+}
+
+.story-card.is-active {
+  border-color: rgba(255, 255, 255, 0.62);
+}
+
+.story-card:hover .story-link i,
+.story-card:focus-visible .story-link i {
+  transform: translate(3px, -3px);
+}
+
+.portfolio-count {
+  margin: 0;
+  position: absolute;
+  left: clamp(1.25rem, 3vw, 3.2rem);
+  bottom: clamp(1.25rem, 3vw, 3.2rem);
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 0.57rem;
+  letter-spacing: 0.16em;
+}
+
+.portfolio-count span {
+  color: var(--champagne);
 }
 
 .hero-image {
@@ -91,15 +313,15 @@ a:focus-visible {
   height: 66px;
   display: grid;
   place-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.42);
   border-radius: 50%;
-  background: rgba(248, 244, 237, 0.92);
-  color: #402c20;
+  background: #a91f24;
+  color: #fffaf5;
   font-family: "Meno Display", Georgia, serif;
   font-size: 1.15rem;
   font-style: italic;
   letter-spacing: -0.05em;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
 }
 
 .brand-copy {
@@ -149,7 +371,12 @@ a:focus-visible {
 
 .top-action {
   cursor: pointer;
+  text-decoration: none;
   transition: background-color 180ms ease, border-color 180ms ease;
+}
+
+.back-action {
+  gap: 0.45rem;
 }
 
 .top-action:hover {
@@ -224,32 +451,46 @@ a:focus-visible {
 }
 
 .film-rail {
-  width: 100%;
+  width: min(66vw, 1260px);
   padding: 0 clamp(1.25rem, 3vw, 3.2rem) clamp(1.25rem, 2.2vw, 2.5rem);
   display: grid;
-  grid-template-columns: repeat(2, minmax(280px, 440px));
-  justify-content: end;
-  gap: clamp(0.75rem, 1.2vw, 1.25rem);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-flow: column;
+  gap: clamp(0.65rem, 0.9vw, 1rem);
   position: absolute;
-  right: 0;
+  right: auto;
   bottom: 0;
   left: 0;
   z-index: 2;
 }
 
 .film-card {
-  aspect-ratio: 16 / 8.8;
+  aspect-ratio: 16 / 9;
   min-width: 0;
   padding: 0;
   overflow: hidden;
   position: relative;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 22px;
+  border-radius: 19px;
   background: #201a15;
   color: white;
   cursor: pointer;
   text-align: left;
   box-shadow: 0 18px 54px rgba(0, 0, 0, 0.3);
+  animation: card-rise 760ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  transform-origin: center bottom;
+  transition:
+    transform 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 300ms ease,
+    box-shadow 420ms ease;
+}
+
+.film-card:nth-child(2) {
+  animation-delay: 90ms;
+}
+
+.film-card:nth-child(3) {
+  animation-delay: 180ms;
 }
 
 .film-card img {
@@ -264,6 +505,28 @@ a:focus-visible {
   position: absolute;
   inset: 0;
   background: linear-gradient(0deg, rgba(9, 7, 5, 0.86) 0%, rgba(9, 7, 5, 0.08) 72%);
+}
+
+.card-preview-play {
+  width: 54px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #6f5a3d;
+  opacity: 0;
+  transform: translate(-50%, -42%) scale(0.86);
+  transition: opacity 260ms ease, transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-preview-play .play-symbol {
+  border-top-width: 7px;
+  border-bottom-width: 7px;
+  border-left-width: 11px;
 }
 
 .card-duration {
@@ -314,6 +577,20 @@ a:focus-visible {
 .film-card:focus-visible img {
   filter: saturate(1.08);
   transform: scale(1.035);
+}
+
+.film-card:hover,
+.film-card:focus-visible {
+  z-index: 4;
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 30px 76px rgba(0, 0, 0, 0.5);
+  transform: translateY(-18px) scale(1.055);
+}
+
+.film-card:hover .card-preview-play,
+.film-card:focus-visible .card-preview-play {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
 }
 
 .player-modal {
@@ -373,17 +650,98 @@ a:focus-visible {
   }
 }
 
+@keyframes card-rise {
+  from {
+    opacity: 0;
+    transform: translateY(52px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 @media (max-width: 900px) {
+  .portfolio-intro {
+    top: 24%;
+  }
+
   .hero-copy {
     bottom: 33svh;
   }
 
   .film-rail {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 68vw;
   }
 }
 
 @media (max-width: 640px) {
+  .portfolio-header {
+    padding: 1rem;
+  }
+
+  .portfolio-meta span:first-child {
+    display: none;
+  }
+
+  .portfolio-intro {
+    width: calc(100% - 2rem);
+    top: 22%;
+    left: 1rem;
+  }
+
+  .portfolio-intro h1 {
+    font-size: clamp(3.6rem, 17vw, 5.6rem);
+    line-height: 0.82;
+  }
+
+  .portfolio-description {
+    width: min(88%, 360px);
+    margin-top: 1.1rem;
+    font-size: 0.6rem;
+    line-height: 1.65;
+  }
+
+  .story-dock {
+    width: calc(100% - 2rem);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.45rem;
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+  }
+
+  .story-card {
+    aspect-ratio: 0.78;
+    border-radius: 2px;
+  }
+
+  .story-number {
+    top: 0.65rem;
+    left: 0.65rem;
+  }
+
+  .story-card-copy {
+    right: 0.65rem;
+    bottom: 0.7rem;
+    left: 0.65rem;
+  }
+
+  .story-card-copy strong {
+    font-size: clamp(0.95rem, 4.3vw, 1.3rem);
+    line-height: 0.92;
+  }
+
+  .story-card-copy small,
+  .story-link {
+    display: none;
+  }
+
+  .portfolio-count {
+    display: none;
+  }
+
   .topbar {
     height: 84px;
     padding: 1rem;
@@ -403,10 +761,16 @@ a:focus-visible {
     font-size: 0.65rem;
   }
 
-  .brand-copy small,
-  .quality-chip,
-  .top-action:first-of-type {
+  .brand-copy small {
     display: none;
+  }
+
+  .quality-chip {
+    display: none;
+  }
+
+  .back-action {
+    padding: 0 0.75rem;
   }
 
   .top-action {
@@ -434,31 +798,36 @@ a:focus-visible {
   }
 
   .film-rail {
+    width: 100%;
     padding: 0 1rem 1rem;
-    display: flex;
-    justify-content: flex-start;
-    gap: 0.7rem;
-    overflow-x: auto;
-    overscroll-behavior-inline: contain;
-    scroll-snap-type: inline mandatory;
-    scrollbar-width: none;
-  }
-
-  .film-rail::-webkit-scrollbar {
-    display: none;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    gap: 0.45rem;
   }
 
   .film-card {
-    width: 78vw;
-    flex: 0 0 78vw;
-    border-radius: 16px;
-    scroll-snap-align: start;
+    width: auto;
+    border-radius: 10px;
   }
 
   .card-copy {
-    right: 1rem;
-    bottom: 1rem;
-    left: 1rem;
+    right: 0.55rem;
+    bottom: 0.55rem;
+    left: 0.55rem;
+  }
+
+  .card-copy strong {
+    font-size: clamp(0.72rem, 3.5vw, 1rem);
+  }
+
+  .card-preview-play {
+    display: none;
+  }
+
+  .card-copy small,
+  .card-duration {
+    display: none;
   }
 
   .player-modal {
@@ -478,10 +847,19 @@ a:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .story-card img,
+  .story-link i,
   .film-card img,
+  .film-card,
+  .card-preview-play,
   .play-all,
   .top-action {
     transition: none;
+  }
+
+  .story-card,
+  .film-card {
+    animation: none;
   }
 
   .player-modal {
