@@ -1,5 +1,5 @@
-:HL["/wedding-video-Jasmin-Daniel/_next/static/chunks/09ada-uas25is.css","style"]
+:HL["/wedding-video-Jasmin-Daniel/_next/static/chunks/0au1ycn4yiosf.css","style"]
 :HL["/wedding-video-Jasmin-Daniel/fonts/meno-display-light.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/wedding-video-Jasmin-Daniel/fonts/meno-display.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/wedding-video-Jasmin-Daniel/fonts/vogue-demi.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}},"staleTime":300,"buildId":"NUyZhxwwdatD-FZ81sEtk"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}},"staleTime":300,"buildId":"hXu2JqKpP4K8AXgMrll1I"}

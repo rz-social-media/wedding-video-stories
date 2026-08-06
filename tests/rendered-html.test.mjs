@@ -49,7 +49,9 @@ test("ships the custom fonts and removes starter dependencies", async () => {
   assert.doesNotMatch(page, /SkeletonPreview|react-loading-skeleton/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
   assert.match(packageJson, /@mux\/mux-player-react/);
-  assert.match(page, /playbackId=\{videos\[0\]\.id\}/);
+  assert.match(page, /playbackId=\{videos\[activeVideo\]\.id\}/);
+  assert.match(page, /images\/jasmin-daniel-hero\.jpg/);
+  assert.doesNotMatch(page, /className="hero-video"/);
   assert.match(
     page,
     /id: "87DnRdS4efJH541k1eIoqx012sy3Lnz900s402UHNaRUew",\s+title: "Teaser — 4K"/,

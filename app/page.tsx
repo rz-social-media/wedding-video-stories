@@ -1,8 +1,9 @@
 "use client";
 
 import MuxPlayer from "@mux/mux-player-react";
-import type { MuxPlayerCSSProperties } from "@mux/mux-player-react";
 import { useEffect, useState } from "react";
+
+const publicBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 const videos = [
   {
@@ -22,16 +23,9 @@ const videos = [
 const thumbnail = (id: string, time: number, width = 1400) =>
   `https://image.mux.com/${id}/thumbnail.webp?time=${time}&width=${width}&fit_mode=smartcrop`;
 
-const backgroundPlayerStyle = {
-  "--controls": "none",
-  "--media-object-fit": "cover",
-  "--media-object-position": "center center",
-} as MuxPlayerCSSProperties;
-
 export default function Home() {
   const [activeVideo, setActiveVideo] = useState<number | null>(null);
   const [isPlaylist, setIsPlaylist] = useState(false);
-  const [heroMuted, setHeroMuted] = useState(true);
   const [shareLabel, setShareLabel] = useState("Share");
 
   useEffect(() => {
@@ -94,21 +88,13 @@ export default function Home() {
 
   return (
     <main className="video-showcase" data-version="1">
-      <MuxPlayer
+      <img
+        alt=""
         aria-hidden="true"
-        autoPlay="muted"
-        className="hero-video"
-        loop
-        maxAutoResolution="1080p"
-        maxResolution="1080p"
-        muted={heroMuted}
-        nohotkeys
-        noMutedPref
-        paused={activeVideo !== null}
-        playbackId={videos[0].id}
-        poster={thumbnail(videos[0].id, videos[0].thumbnailTime, 1800)}
-        preload="metadata"
-        style={backgroundPlayerStyle}
+        className="hero-image"
+        decoding="async"
+        fetchPriority="high"
+        src={`${publicBasePath}/images/jasmin-daniel-hero.jpg`}
       />
 
       <div className="cinematic-shade" aria-hidden="true" />
@@ -124,14 +110,6 @@ export default function Home() {
 
         <div className="top-actions">
           <span className="quality-chip">4K</span>
-          <button
-            className="top-action"
-            onClick={() => setHeroMuted((muted) => !muted)}
-            type="button"
-            aria-label={heroMuted ? "Turn background sound on" : "Mute background sound"}
-          >
-            {heroMuted ? "Sound off" : "Sound on"}
-          </button>
           <button className="top-action" onClick={sharePage} type="button">
             {shareLabel}
           </button>

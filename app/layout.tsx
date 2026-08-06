@@ -30,7 +30,7 @@ const fontFaceStyles = `
 `;
 
 const previewImage =
-  "https://image.mux.com/87DnRdS4efJH541k1eIoqx012sy3Lnz900s402UHNaRUew/thumbnail.jpg?time=12&width=1200&height=630&fit_mode=smartcrop";
+  "https://rz-social-media.github.io/wedding-video-Jasmin-Daniel/images/jasmin-daniel-hero.jpg";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
