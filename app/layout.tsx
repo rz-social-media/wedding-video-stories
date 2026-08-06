@@ -30,26 +30,26 @@ const fontFaceStyles = `
 `;
 
 const previewImage =
-  "https://image.mux.com/U4dV8gv00k100tBpVS9KrAfxAOPuBd5XskwlHHcdSChak/thumbnail.jpg?time=12&width=1200&height=630&fit_mode=smartcrop";
+  "https://image.mux.com/87DnRdS4efJH541k1eIoqx012sy3Lnz900s402UHNaRUew/thumbnail.jpg?time=12&width=1200&height=630&fit_mode=smartcrop";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    "https://rz-social-media.github.io/wedding-video-portfolio/",
+    "https://rz-social-media.github.io/wedding-video-Jasmin-Daniel/",
   ),
-  title: "Ofir & Michael | RZ Wedding Films",
+  title: "Jasmin & Daniel | RZ Wedding Videos",
   description:
-    "Ofir and Michael's wedding story, captured in cinematic motion by RZ Weddings.",
+    "Jasmin and Daniel's wedding story, captured in cinematic motion by RZ Weddings.",
   openGraph: {
-    title: "Ofir & Michael | RZ Wedding Films",
+    title: "Jasmin & Daniel | RZ Wedding Videos",
     description: "A wedding story in cinematic motion.",
-    url: "https://rz-social-media.github.io/wedding-video-portfolio/",
+    url: "https://rz-social-media.github.io/wedding-video-Jasmin-Daniel/",
     siteName: "RZ Weddings",
     images: [previewImage],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ofir & Michael | RZ Wedding Films",
+    title: "Jasmin & Daniel | RZ Wedding Videos",
     description: "A wedding story in cinematic motion.",
     images: [previewImage],
   },

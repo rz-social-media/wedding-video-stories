@@ -29,8 +29,8 @@ test("server-renders the finished wedding film portfolio", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>Ofir &amp; Michael \| RZ Wedding Films<\/title>/i);
-  assert.match(html, /Ofir &amp; Michael/);
+  assert.match(html, /<title>Jasmin &amp; Daniel \| RZ Wedding Videos<\/title>/i);
+  assert.match(html, /Jasmin &amp; Daniel/);
   assert.match(html, /Play all/i);
   assert.match(html, /Teaser — 4K/);
   assert.match(html, /Short Film — 4K/);
@@ -50,9 +50,17 @@ test("ships the custom fonts and removes starter dependencies", async () => {
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
   assert.match(packageJson, /@mux\/mux-player-react/);
   assert.match(page, /playbackId=\{videos\[0\]\.id\}/);
+  assert.match(
+    page,
+    /id: "87DnRdS4efJH541k1eIoqx012sy3Lnz900s402UHNaRUew",\s+title: "Teaser — 4K"/,
+  );
+  assert.match(
+    page,
+    /id: "U4dV8gv00k100tBpVS9KrAfxAOPuBd5XskwlHHcdSChak",\s+title: "Short Film — 4K"/,
+  );
   assert.match(page, /minResolution="2160p"/);
   assert.match(page, /maxResolution="2160p"/);
-  assert.match(layout, /RZ Wedding Films/);
+  assert.match(layout, /RZ Wedding Videos/);
 
   await Promise.all([
     access(new URL("../public/fonts/meno-display.woff2", import.meta.url)),

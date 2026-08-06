@@ -6,13 +6,13 @@ import { useEffect, useState } from "react";
 
 const videos = [
   {
-    id: "U4dV8gv00k100tBpVS9KrAfxAOPuBd5XskwlHHcdSChak",
+    id: "87DnRdS4efJH541k1eIoqx012sy3Lnz900s402UHNaRUew",
     title: "Teaser — 4K",
     duration: "00:27",
     thumbnailTime: 12,
   },
   {
-    id: "87DnRdS4efJH541k1eIoqx012sy3Lnz900s402UHNaRUew",
+    id: "U4dV8gv00k100tBpVS9KrAfxAOPuBd5XskwlHHcdSChak",
     title: "Short Film — 4K",
     duration: "07:00",
     thumbnailTime: 0,
@@ -74,8 +74,8 @@ export default function Home() {
 
   const sharePage = async () => {
     const shareData = {
-      title: "RZ Weddings — Ofir & Michael",
-      text: "Watch Ofir & Michael's wedding films.",
+      title: "RZ Weddings — Jasmin & Daniel",
+      text: "Watch Jasmin & Daniel's wedding videos.",
       url: window.location.href,
     };
 
@@ -140,7 +140,7 @@ export default function Home() {
 
       <section className="hero-copy" id="top" aria-labelledby="wedding-title">
         <p className="eyebrow">A wedding story</p>
-        <h1 id="wedding-title">Ofir &amp; Michael</h1>
+        <h1 id="wedding-title">Jasmin &amp; Daniel</h1>
         <p className="location">Italy · MMXXVI</p>
         <button className="play-all" onClick={() => openVideo(0, true)} type="button">
           <span className="play-symbol" aria-hidden="true" />
